@@ -22,7 +22,7 @@ The builder rejects invalid paths, reserved generated-file paths, and malformed 
 
 ## Templates
 
-The template explorer lists repository folders and JavaScript source files. Markdown and image files are not shown in its file list. Public template source is fetched from the EasyBot GitHub repository; GitHub's unauthenticated API rate limits apply.
+The template explorer lists repository folders and JavaScript source files. Markdown and image files are not shown in its file list. Public template source is fetched from the EasyBot GitHub repository.
 
 ## Keyboard shortcuts
 
