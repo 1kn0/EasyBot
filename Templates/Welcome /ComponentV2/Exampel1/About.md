@@ -7,8 +7,6 @@ This example sends a Components V2 welcome card when a member joins. It includes
 
 ![Welcome card preview](./preview.png)
 
-Replace `preview.svg` with your own preview image, or update the image path above to point to another image file.
-
 ## Setup
 
 In `index.js`, replace `YOUR_WELCOME_CHANNEL_ID`, `YOUR_RULES_CHANNEL_ID`, and `YOUR_VERIFY_CHANNEL_ID` with the channel IDs from your server. The banner URL in the code is also a placeholder; change it to your image URL.
