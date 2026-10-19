@@ -1,29 +1,40 @@
 # Server info helper
 
-`ServerInfo()` is a built-in slash-command action. It adds one optional boolean option for each field and automatically returns a Components V2 card. Every field is shown by default; set its option to `false` when running the slash command to hide it.
+`ServerInfo(options)` is a built-in slash-command action. Configure which fields to show with `true` or `false` in your bot code; every field is shown by default. The action automatically returns a Components V2 card and does not add display-toggle options to the slash command.
 
 ```js
 import { bot } from 'EasyBot';
 
 bot.slashCommand('serverinfo', 'Show server information')
-  .ServerInfo();
+  .ServerInfo({
+    showName: true,
+    showIcon: true,
+    showDescription: true,
+    showOwner: true,
+    showCreated: true,
+    showMembers: true,
+    showChannels: true,
+    showRoles: true,
+    showBoosts: true,
+    showVerification: false,
+  });
 ```
 
-The helper adds these slash options:
+`ServerInfo(options)` accepts:
 
-| Option | Displays |
-| --- | --- |
-| `show-name` | Server name; also used as the card title. |
-| `show-icon` | Server icon image at the top of the card. |
-| `show-description` | Server description, when one is set. |
-| `show-owner` | Server owner mention. |
-| `show-created` | Server creation date. |
-| `show-members` | Current server member count. |
-| `show-channels` | Cached channel count, labelled as cached. |
-| `show-roles` | Role count excluding `@everyone`. |
-| `show-boosts` | Boost count and server boost tier. |
-| `show-verification` | Server verification level. |
+| Option | Default | Displays |
+| --- | --- | --- |
+| `showName` | `true` | Server name; also used as the card title. |
+| `showIcon` | `true` | Server icon image at the top of the card. |
+| `showDescription` | `true` | Server description, when one is set. |
+| `showOwner` | `true` | Server owner mention. |
+| `showCreated` | `true` | Server creation date. |
+| `showMembers` | `true` | Current server member count. |
+| `showChannels` | `true` | Cached channel count, labelled as cached. |
+| `showRoles` | `true` | Role count excluding `@everyone`. |
+| `showBoosts` | `true` | Boost count and server boost tier. |
+| `showVerification` | `true` | Server verification level. |
 
-Example command use: run `/serverinfo` and set `show-icon` to `false` to omit the icon. If all fields are hidden, the card explains that no information fields are selected.
+Set any field to `false` in the `.ServerInfo({...})` call to hide it. If all fields are hidden, the card explains that no information fields are selected.
 
 The helper can only display server information when invoked inside a server. Enable the Server Members privileged intent in the Developer Portal if the bot also needs member lifecycle events.

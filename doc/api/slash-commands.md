@@ -43,10 +43,10 @@ The generated slash-command chain also includes built-in PascalCase actions. The
 
 ```js
 bot.slashCommand('serverinfo', 'Show server information')
-  .ServerInfo();
+  .ServerInfo({ showMembers: true, showVerification: false });
 
 bot.slashCommand('userinfo', 'Show user information')
-  .UserInfo();
+  .UserInfo({ showAvatar: false, showRoles: true });
 
 bot.slashCommand('ban', 'Ban a member')
   .Ban({ moderatorRoleId: 'MODERATOR_ROLE_ID' });
@@ -54,8 +54,8 @@ bot.slashCommand('ban', 'Ban a member')
 
 | Action | Behavior |
 | --- | --- |
-| `.ServerInfo()` | Adds configurable boolean fields and returns a Components V2 guild-information card. |
-| `.UserInfo()` | Adds an optional target user and configurable boolean fields, then returns a Components V2 user card. |
+| `.ServerInfo(options)` | Configures display fields in code and returns a Components V2 guild-information card. |
+| `.UserInfo(options)` | Configures display fields in code, adds an optional target-user option, and returns a Components V2 user card. |
 | `.Ban({ moderatorRoleId })` | Adds a target and optional reason; requires the configured moderator role and bot ban permission. |
 | `.Kick({ moderatorRoleId })` | Adds a target and optional reason; requires the configured moderator role and bot kick permission. |
 | `.Timeout({ moderatorRoleId })` | Adds a target, duration (1–40320 minutes), and optional reason; requires the moderator role and Moderate Members permission. |
