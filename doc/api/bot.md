@@ -14,6 +14,7 @@ The package also exposes named exports `client` and `log`. Most projects only ne
 | --- | --- |
 | `bot.onMessage()` | Start a guild message flow. See [Event flows](event-flows.md). |
 | `bot.onMemberJoin()` | Start a guild member-join flow. See [Event flows](event-flows.md). |
+| `bot.onMemberLeave()` | Start a guild member-leave flow with `.Goodbye(options)`. See [Event flows](event-flows.md). |
 | `bot.slashCommand(name, description)` | Create and register a slash command. See [Slash commands](slash-commands.md). |
 | `bot.registerSlashCommand(definition, handler)` | Register a native `SlashCommandBuilder` and a handler. Returns `bot`. |
 | `bot.onButton(customId)` | Handle a button interaction with the matching custom ID. |
@@ -38,6 +39,8 @@ The package also exposes named exports `client` and `log`. Most projects only ne
 | `bot.componentsV2(...components)` | Convert an object, string, or Discord component builders into a Components V2 payload. |
 
 See [Messages and Components V2](components.md) for object options and examples.
+
+For ready-to-use actions and moderation examples, see the [Ready Kits](../readykit/Kits.md).
 
 ## Fetching Discord data
 

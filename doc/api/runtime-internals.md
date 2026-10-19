@@ -13,7 +13,7 @@ This page documents functions shared between generated runtime modules. They are
 
 ### Event and interaction functions
 
-- `flow(eventType)` — creates the message or member-join fluent chain used by `bot.onMessage()` and `bot.onMemberJoin()`.
+- `flow(eventType)` — creates the message, member-join, or member-leave fluent chain used by the corresponding `bot` methods.
 - `slashCommand(name, description)` — creates a slash-command definition and fluent chain.
 - `interactionFlow(type, id)` — creates a component-interaction chain for a custom ID.
 - `dispatchInteraction(interaction)` — routes chat-input commands and supported component interactions to registered handlers.
@@ -43,6 +43,10 @@ See [Messages and Components V2](components.md) for supported object fields.
 
 - `log(...values)` — formats values with Node.js `util.format` and writes one line to standard output.
 - `writeFlowLogs(options, context)` — evaluates function-valued log arguments with the triggering context and sends each configured entry to `log`.
+
+## `src/utils/readyKits.js`
+
+This internal module builds server-info, user-info, and goodbye Components V2 payloads, adds slash-command option definitions, and implements moderator-role-protected ban, kick, timeout, and role-change actions. Public usage is documented in [Ready Kits](../readykit/Kits.md); call the chain actions instead of importing this internal module.
 
 ## `src/middleware/discordEvents.js`
 

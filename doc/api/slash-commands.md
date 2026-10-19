@@ -35,7 +35,34 @@ Read submitted values through the standard Discord.js `interaction.options` API 
 - `.else().reply(response)` sets a response for a failed role check.
 - `.catchError().reply(response)` sets an error fallback.
 
-The response can be a string, a Discord interaction reply payload, or an async callback receiving the interaction. A reply is required to register the command.
+The response can be a string, a Discord interaction reply payload, or an async callback receiving the interaction. Call `.reply(...)` or one of the Ready Kit actions below to register the command.
+
+## Ready Kit actions
+
+The generated slash-command chain also includes built-in PascalCase actions. They add their own options and handler; do not add `.reply(...)` afterward unless you intentionally want to replace the built-in handler.
+
+```js
+bot.slashCommand('serverinfo', 'Show server information')
+  .ServerInfo();
+
+bot.slashCommand('userinfo', 'Show user information')
+  .UserInfo();
+
+bot.slashCommand('ban', 'Ban a member')
+  .Ban({ moderatorRoleId: 'MODERATOR_ROLE_ID' });
+```
+
+| Action | Behavior |
+| --- | --- |
+| `.ServerInfo()` | Adds configurable boolean fields and returns a Components V2 guild-information card. |
+| `.UserInfo()` | Adds an optional target user and configurable boolean fields, then returns a Components V2 user card. |
+| `.Ban({ moderatorRoleId })` | Adds a target and optional reason; requires the configured moderator role and bot ban permission. |
+| `.Kick({ moderatorRoleId })` | Adds a target and optional reason; requires the configured moderator role and bot kick permission. |
+| `.Timeout({ moderatorRoleId })` | Adds a target, duration (1–40320 minutes), and optional reason; requires the moderator role and Moderate Members permission. |
+| `.AddRole({ moderatorRoleId })` | Adds a target and up to five role options; requires the moderator role and Manage Roles. |
+| `.RemoveRole({ moderatorRoleId })` | Adds a target, five optional roles, and `remove-all`; protects managed roles, `@everyone`, and roles above the bot. |
+
+Moderation helper replies are private. They check the configured moderator role and Discord.js manageability/role hierarchy where applicable. Discord's permission checks remain authoritative. See [Ready Kits](../readykit/Kits.md) for full usage and configuration details.
 
 ## Registration behavior
 

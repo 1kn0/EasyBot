@@ -21,6 +21,7 @@ bot.onMessage()
 | `ifHasRole` | `.ifHasRole(roleId)` | Continue only when the member has the role. |
 | `log` | `.log(...values)` | Log values when a matching handler executes; function values receive the message. |
 | `command` | `.command(name, description)` | Filter messages by `startsWith(name)`. |
+| `clearMessages` | `.clearMessages(count)` | Delete up to 100 recent messages from the triggering channel before the flow reply. |
 | `react` | `.react(emoji)` | Add a reaction to each matching message. May be repeated. |
 | `embed` | `.embed(titleOrData, description)` | Add an embed to the flow reply. May be repeated. |
 | `button` | `.button(customId, label, style = 'Primary')` | Add one custom-ID button to the flow reply. |
@@ -31,6 +32,8 @@ bot.onMessage()
 | `reply` | `.reply(content)` | Set the response; content may be a string, Discord payload, or callback receiving the message. |
 
 For message callbacks, return a string or Discord message payload. Added embeds and components are merged into the reply payload.
+
+See the [Clear Messages Ready Kit](../readykit/clear-messages.md) for count limits, permissions, and a complete command example.
 
 ## Member-join flow
 
@@ -52,3 +55,33 @@ bot.onMemberJoin()
 | `componentV2` | `.componentV2(content)` | Send a Components V2 welcome payload. A callback receives the guild member. |
 
 The flow fetches the configured channel when a member joins and requires it to be text-based. String replies replace `{user}` with the member mention. For rich payloads, build mentions explicitly in the callback.
+
+## Member-leave flow
+
+Use the built-in goodbye action to create and send a Components V2 message:
+
+```js
+bot.onMemberLeave()
+  .sendTo('GOODBYE_CHANNEL_ID')
+  .Goodbye({
+    showUser: true,
+    showServerName: true,
+    showMemberCount: true,
+  });
+```
+
+`bot.onMemberLeave()` listens to `GuildMemberRemove`; `.sendTo(channelId)` chooses the text channel, and `.Goodbye(options)` builds and sends the Components V2 card. The helper requires `.sendTo(...)` before `.Goodbye(...)`.
+
+| Goodbye option | Default | Effect |
+| --- | --- | --- |
+| `title` | `"Goodbye!"` | Card title. |
+| `showUser` | `true` | Include the departing account name. |
+| `showServerName` | `true` | Include the server name. |
+| `showMemberCount` | `true` | Include the member count. |
+| `showAccountCreated` | `false` | Include the account creation date. |
+| `showAvatar` | `false` | Use the departing user's avatar as the card image. |
+| `image` | unset | Custom banner URL, preferred over avatar. |
+| `separator` | `true` | Add a divider; supports Components V2 separator options. |
+| `color` | unset | Set the container accent color. |
+
+The generated client already enables the Server Members intent; enable it in the Developer Portal as well. The bot needs View Channel and Send Messages in the selected channel. See the [Goodbye Ready Kit](../readykit/goodbye-message.md).
