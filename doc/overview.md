@@ -25,6 +25,10 @@ EasyBot is a browser IDE for creating Discord.js v14 bot projects. Write bot cod
 - [Errors and logging](guides/errors-and-logging.md) — flow logs, error replies, and startup logging.
 - [Ready Kits](readykit/Kits.md) — copy-ready moderation and information features.
 
+### References
+
+- [Discord reference guides](refers/index.md) — separate examples for copying IDs, using mentions, and getting avatar URLs.
+
 ## Generated project layout
 
 Building the IDE workspace creates a Node.js ES-module project:
